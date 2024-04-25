@@ -39,6 +39,8 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;
+        $user->position = $request->position;
+        $user->department = $request->department;
         $user->role = $request->role;
         $user->password = Hash::make($request->password);
         $user->save();
@@ -66,6 +68,8 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;
+        $user->position = $request->position;
+        $user->department = $request->department;
         $user->role = $request->role;
 
         if($request->password)
