@@ -43,4 +43,27 @@ class AuthController extends Controller
 
         return response(['message' => 'Logged out'], 200);
     }
+
+    // update image profile & face_embedding
+    public function updateProfile(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'face_embedding' => 'required',
+        ]);
+
+        $user = $request->user();
+        $image = $request->file('image');
+        $face_embedding = $request->face_embedding;
+
+        // save image
+        $image_name = time() . '.' . $image->extension();
+        $image->move(public_path('images'), $image_name);
+
+        $user->image_url = $image_name;
+        $user->face_embedding = $face_embedding;
+        $user->save();
+
+        return response(['message' => 'Profile updated', 'user' => $user], 200);
+    }
 }
