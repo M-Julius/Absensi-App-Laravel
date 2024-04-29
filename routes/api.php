@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\PermissionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
@@ -31,3 +32,6 @@ Route::get('/is-checkin', [AttendanceController::class, 'isCheckedin'])->middlew
 
 // update profile
 Route::post('/update-profile', [AuthController::class, 'updateProfile'])->middleware('auth:sanctum');
+
+// create permission
+Route::apiResource('/api-permissions', PermissionController::class)->middleware('auth:sanctum');
